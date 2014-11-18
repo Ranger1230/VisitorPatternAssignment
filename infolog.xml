@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE log SYSTEM "logging.dtd">
+<log>
+   <information application="sample" level="0">
+   <text>The application was started</text>
+   </information>
+   <information application="sample" level="0">
+   <text>A snapshot was taken</text>
+   </information>
+</log>

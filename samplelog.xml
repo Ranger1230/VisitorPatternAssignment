@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE log SYSTEM "logging.dtd">
+<log>
+   <fromdate month="08" day="31" year="1999" hour="21" minute="11" second="23" />
+   <todate month="08" day="31" year="1999" hour="21" minute="11" second="23"   />
+   <metrics application="sample">
+      <group name="threads" category="snapshot">
+	   <timestamp month="08" day="31" year="1999" hour="21" minute="11" second="23" millisecond="362" />
+         <counter name="Worker" category="queued" value="10"></counter>
+         <counter name="UI" category="queue" value="0"></counter>
+      </group>
+      <group name="threads" category="response">
+         <response name="Worker" category="threads" milliseconds="463"></response>
+         <response name="UI" category="threads" milliseconds="780"></response>
+      </group>
+   </metrics>
+   <information application="sample" level="0">
+      <timestamp month="08" day="31" year="1999" hour="21" minute="11" second="23" millisecond="362" />
+      <component name="sample" 
+                 class="COM.hilbertinc.metrics.HCollector"
+                 method="snapshot"
+                 line="12"
+                 />
+      <text>A snapshot was taken</text>
+   </information>
+</log>
+
+
