@@ -61,7 +61,7 @@ public class HtmlVisitor implements HDOMVisitor {
 	@Override
 	public void processElementEpilog(Element node) throws Exception {
 		Writer xml = getWriter();
-		xml.write(getIndent());
+		xml.write(getTagOpen());
 		xml.write("&lt;&sol;");//add a '<' and an '\' in html
 		xml.write(node.getNodeName());
 		xml.write("&gt;");//add a '>' in html
@@ -76,11 +76,11 @@ public class HtmlVisitor implements HDOMVisitor {
 		Writer xml = getWriter();
 		indentMore();
 		xml.write(getTagOpen());
-		xml.write(getIndent());
 		xml.write("&lt;");//add a '<' in html
 		xml.write(node.getNodeName());
 		xml.write("&gt;");//add a '>' in html
 		xml.write("<br>");
+		xml.write(getTagClose());
 		return;	
 	}
 
@@ -88,8 +88,11 @@ public class HtmlVisitor implements HDOMVisitor {
 	public void processText(Text text) throws Exception {
 		Writer xml = getWriter();
 		if(text.toString() != ""){
-			xml.write(getIndent());
+			indentMore();
+			xml.write(getTagOpen());
 			xml.write(HDOMUtil.trim(text));
+			xml.write(getTagClose());
+			indentLess();
 		}
 		return;
 	}
@@ -100,24 +103,19 @@ public class HtmlVisitor implements HDOMVisitor {
 		getWriter().flush();
 		return;
 	}
-
-	private String getIndent(){
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < this._indent*3; ++i)
-			buffer.append("&nbsp;");
-		return buffer.toString();
-	}
 	
 	private String getTagOpen() 
 	{
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<H"+(7-this._indent)+">\n");
+		buffer.append("<H"+(this._indent)+">\n");
+		buffer.append("<div style=\"margin-left:"+(this._indent*3)+"em\">");
 		return buffer.toString();
 	}
 	
 	private String getTagClose(){
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("</H"+(7-this._indent)+">\n");
+		buffer.append("</div>");
+		buffer.append("</H"+(this._indent)+">\n");
 		return buffer.toString();
 	}
 
