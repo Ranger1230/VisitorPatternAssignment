@@ -1,5 +1,6 @@
 package COM.hilbertinc.xml;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 
@@ -68,9 +69,11 @@ public class HtmlVisitor implements HDOMVisitor {
 	@Override
 	public void processElementProlog(Element node) throws Exception {
 		Writer xml = getWriter();
+		indentMore();
 		xml.write(getTagOpen());
 		xml.write("\n");
-		indentMore();
+		xml.write(node.getNodeName());
+		xml.write("\n");
 		return;	
 	}
 
@@ -81,14 +84,29 @@ public class HtmlVisitor implements HDOMVisitor {
 		xml.write("\n");
 		return;
 	}
+	
+	public void flush()
+	throws IOException
+	{
+		getWriter().flush();
+		return;
+	}
 
 	private String getTagOpen() 
 	{
-		return "<H"+this._indent+">";
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < this._indent*3; ++i)
+			buffer.append(' ');
+		buffer.append("<H"+this._indent+">");
+		return buffer.toString();
 	}
 	
 	private String getTagClose(){
-		return "</H"+this._indent+">";
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < this._indent*3; ++i)
+			buffer.append(' ');
+		buffer.append("</H"+this._indent+">");
+		return buffer.toString();
 	}
 
 	private void indentLess() 
