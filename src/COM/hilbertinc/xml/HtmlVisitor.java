@@ -29,9 +29,8 @@ public class HtmlVisitor implements HDOMVisitor {
 	throws Exception 
 	{
 		Writer xml = getWriter();
-		xml.write("<!DOCTYPE HTML>\n");
 		xml.write("<Html lang=\"en\"n");
-		xml.write("<body>\n");
+		xml.write("<body><br>");
 		return;
 	}
 
@@ -47,21 +46,26 @@ public class HtmlVisitor implements HDOMVisitor {
 	throws Exception
 	{
 		Writer xml = getWriter();
-		xml.write("</body>\n");
-		xml.write("</Html>\n");
+		xml.write("</body><br>");
+		xml.write("</Html><br>");
 		return;
 	}
 
 	@Override
 	public void processDocumentType(DocumentType dtd) throws Exception {
-		
+		Writer xml = getWriter();
+		xml.write("<!DOCTYPE HTML><br>");
+		return;
 	}
 
 	@Override
 	public void processElementEpilog(Element node) throws Exception {
 		Writer xml = getWriter();
+		xml.write(getIndent());
+		xml.write("&lt;&sol;");
+		xml.write(node.getNodeName());
+		xml.write("&gt;<br>");
 		xml.write(getTagClose());
-		xml.write("\n");
 		indentLess();
 		return;	
 	}
@@ -71,17 +75,20 @@ public class HtmlVisitor implements HDOMVisitor {
 		Writer xml = getWriter();
 		indentMore();
 		xml.write(getTagOpen());
-		xml.write("\n");
+		xml.write(getIndent());
+		xml.write("&lt;");
 		xml.write(node.getNodeName());
-		xml.write("\n");
+		xml.write("&gt;<br>");
 		return;	
 	}
 
 	@Override
 	public void processText(Text text) throws Exception {
 		Writer xml = getWriter();
-		xml.write(HDOMUtil.trim(text));
-		xml.write("\n");
+		if(text.toString() != ""){
+			xml.write(getIndent());
+			xml.write(HDOMUtil.trim(text));
+		}
 		return;
 	}
 	
@@ -92,20 +99,23 @@ public class HtmlVisitor implements HDOMVisitor {
 		return;
 	}
 
+	private String getIndent(){
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < this._indent*3; ++i)
+			buffer.append("&nbsp;");
+		return buffer.toString();
+	}
+	
 	private String getTagOpen() 
 	{
 		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < this._indent*3; ++i)
-			buffer.append(' ');
-		buffer.append("<H"+this._indent+">");
+		buffer.append("<H"+(7-this._indent)+">\n");
 		return buffer.toString();
 	}
 	
 	private String getTagClose(){
 		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < this._indent*3; ++i)
-			buffer.append(' ');
-		buffer.append("</H"+this._indent+">");
+		buffer.append("</H"+(7-this._indent)+">\n");
 		return buffer.toString();
 	}
 
