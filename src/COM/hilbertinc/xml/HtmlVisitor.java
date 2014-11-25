@@ -62,9 +62,10 @@ public class HtmlVisitor implements HDOMVisitor {
 	public void processElementEpilog(Element node) throws Exception {
 		Writer xml = getWriter();
 		xml.write(getIndent());
-		xml.write("&lt;&sol;");
+		xml.write("&lt;&sol;");//add a '<' and an '\' in html
 		xml.write(node.getNodeName());
-		xml.write("&gt;<br>");
+		xml.write("&gt;");//add a > in html
+		xml.write("<br>");
 		xml.write(getTagClose());
 		indentLess();
 		return;	
@@ -76,9 +77,10 @@ public class HtmlVisitor implements HDOMVisitor {
 		indentMore();
 		xml.write(getTagOpen());
 		xml.write(getIndent());
-		xml.write("&lt;");
+		xml.write("&lt;");//add a '<' in html
 		xml.write(node.getNodeName());
-		xml.write("&gt;<br>");
+		xml.write("&gt;");//add a '>' in html
+		xml.write("<br>");
 		return;	
 	}
 
