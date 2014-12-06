@@ -45,8 +45,8 @@ public static void main(java.lang.String[] args)
 		System.out.println("Done.  Dumping contents of parsed document.");
 		try
 			{
-			//HDumperVisitor dumper = new HDumperVisitor();
-			HtmlVisitor dumper = new HtmlVisitor();
+			HDumperVisitor dumper = new HDumperVisitor();
+			//HtmlVisitor dumper = new HtmlVisitor();
 			parser.traverse(dumper);
 			dumper.flush();
 			System.out.println("Done.");
