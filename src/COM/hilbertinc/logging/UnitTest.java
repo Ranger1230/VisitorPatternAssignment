@@ -45,10 +45,11 @@ public static void main(java.lang.String[] args)
 		System.out.println("Done.  Dumping contents of parsed document.");
 		try
 			{
-			HDumperVisitor dumper = new HDumperVisitor();
+			//HDumperVisitor dumper = new HDumperVisitor();
 			//HtmlVisitor dumper = new HtmlVisitor();
-			parser.traverse(dumper);
-			dumper.flush();
+			//parser.traverse(dumper);
+			//dumper.flush();
+			HDOMTraverse.traverse(new ReflectiveHTMLVisitor(), parser.getDocument());
 			System.out.println("Done.");
 			}
 		catch(Exception exception)
