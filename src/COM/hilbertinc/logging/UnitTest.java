@@ -49,7 +49,7 @@ public static void main(java.lang.String[] args)
 			//HtmlVisitor dumper = new HtmlVisitor();
 			//parser.traverse(dumper);
 			//dumper.flush();
-			HDOMTraverse.traverse(new ReflectiveHTMLVisitor(), parser.getDocument());
+			NodeIterator.traverse(new ReflectiveHTMLVisitor(), parser.getDocument());
 			System.out.println("Done.");
 			}
 		catch(Exception exception)
