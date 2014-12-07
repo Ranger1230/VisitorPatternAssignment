@@ -1,12 +1,11 @@
 package COM.hilbertinc.xml;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class HDOMTraverse {
+public class NodeIterator {
 
-	public HDOMTraverse() {
+	public NodeIterator() {
 		// TODO Auto-generated constructor stub
 	}
 	
